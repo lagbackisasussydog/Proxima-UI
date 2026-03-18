@@ -1,5 +1,7 @@
 local Proxima = {}
 
+local Lucide = loadstring(game:HttpGet("https://raw.githubusercontent.com/lagbackisasussydog/Proxima-UI/refs/heads/main/lucide-roblox.luau"))()
+
 function Proxima:InitWindow(WindowTitle : string)
 	local Window = {}
 	
@@ -106,8 +108,10 @@ function Proxima:InitWindow(WindowTitle : string)
 	Close.Size = UDim2.new(0, 25, 0, 25)
 	Close.Image = "http://www.roblox.com/asset/?id=6031094678"
 	
-	function Window:Tab(TabName : string)
+	function Window:Tab(TabName : string, Icon : string)
 		local Tabs = {}
+
+		local Asset = Lucide.GetAsset(Icon)
 		
 		local Section = Instance.new("ScrollingFrame")
 		local UIGradient_2 = Instance.new("UIGradient")
@@ -123,7 +127,7 @@ function Proxima:InitWindow(WindowTitle : string)
 		Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Button.BorderSizePixel = 0
 		Button.Size = UDim2.new(0, 25, 0, 25)
-		Button.Image = "http://www.roblox.com/asset/?id=6026568195"
+		Button.Image = Asset.Url
 
 		UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(81, 81, 81))}
 		UIGradient.Rotation = -90
