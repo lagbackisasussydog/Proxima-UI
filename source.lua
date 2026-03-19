@@ -111,7 +111,7 @@ function Proxima:InitWindow(WindowTitle : string)
 	function Window:Tab(TabName : string, Icon : string)
 		local Tabs = {}
 
-		local Asset = Lucide.GetAsset(Icon)
+		local Asset = Lucide.GetAsset(Icon, 25)
 		
 		local Section = Instance.new("ScrollingFrame")
 		local UIGradient_2 = Instance.new("UIGradient")
