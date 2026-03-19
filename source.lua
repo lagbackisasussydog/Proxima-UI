@@ -128,6 +128,8 @@ function Proxima:InitWindow(WindowTitle : string)
 		Button.BorderSizePixel = 0
 		Button.Size = UDim2.new(0, 25, 0, 25)
 		Button.Image = Asset.Url
+		Button.ImageRectOffset = Asset.ImageRectOffset
+		Button.ImageRectSize = Asset.ImageRectSize
 
 		UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(81, 81, 81))}
 		UIGradient.Rotation = -90
