@@ -282,7 +282,7 @@ function Proxima:InitWindow(WindowTitle : string)
 			Label_2.Position = UDim2.new(0.0299999993, 0, 0.0599999987, 0)
 			Label_2.Size = UDim2.new(0, 216, 0, 17)
 			Label_2.Font = Enum.Font.SourceSans
-			Label_2.Text = "Toggle"
+			Label_2.Text = Title
 			Label_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Label_2.TextSize = 14.000
 			Label_2.TextXAlignment = Enum.TextXAlignment.Left
@@ -296,7 +296,7 @@ function Proxima:InitWindow(WindowTitle : string)
 			subLabel_2.Position = UDim2.new(0.0299999993, 0, 0.400000006, 0)
 			subLabel_2.Size = UDim2.new(0, 216, 0, 27)
 			subLabel_2.Font = Enum.Font.SourceSans
-			subLabel_2.Text = "This is a toggle"
+			subLabel_2.Text = SubTitle
 			subLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 			subLabel_2.TextSize = 14.000
 			subLabel_2.TextXAlignment = Enum.TextXAlignment.Left
