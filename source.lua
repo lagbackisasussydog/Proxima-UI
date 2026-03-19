@@ -107,6 +107,13 @@ function Proxima:InitWindow(WindowTitle : string)
 	Close.Position = UDim2.new(0.928571403, 0, 0, 0)
 	Close.Size = UDim2.new(0, 25, 0, 25)
 	Close.Image = "http://www.roblox.com/asset/?id=6031094678"
+
+	Close.MouseButton1Up:Connect(function()
+		local t = game:GetService("TweenService"):Create(Main, TweenInfo.new(.5), {Size = UDim2.new(0,350,0,0), GroupTransparency = 1})
+		t:Play()
+		t.Completed:Wait()
+		Main:Destroy()
+	end)
 	
 	function Window:Tab(TabName : string, Icon : string)
 		local Tabs = {}
