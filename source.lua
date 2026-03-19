@@ -112,7 +112,7 @@ function Proxima:InitWindow(WindowTitle : string)
 		local t = game:GetService("TweenService"):Create(Main, TweenInfo.new(.5), {Size = UDim2.new(0,350,0,0), GroupTransparency = 1})
 		t:Play()
 		t.Completed:Wait()
-		Main:Destroy()
+		Proxima:Destroy()
 	end)
 	
 	function Window:Tab(TabName : string, Icon : string)
