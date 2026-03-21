@@ -741,6 +741,199 @@ function Proxima:InitWindow(WindowTitle : string)
 		
 		return Tabs
 	end
+
+	function Window:TargetHUD(target : Model)
+		local TargetHUD = {}
+		
+		if target.PrimaryPart:FindFirstChild("Gui") then return end
+		
+		local Gui = Instance.new("BillboardGui")
+		local Main = Instance.new("CanvasGroup")
+		local Target = Instance.new("TextLabel")
+		local UIPadding = Instance.new("UIPadding")
+		local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+		local Box = Instance.new("Frame")
+		local Fill = Instance.new("Frame")
+		local Health = Instance.new("TextLabel")
+		local UIPadding_2 = Instance.new("UIPadding")
+		local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
+		local MaxHealth = Instance.new("TextLabel")
+		local UIPadding_3 = Instance.new("UIPadding")
+		local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
+		local Hit = Instance.new("TextLabel")
+		local UIPadding_4 = Instance.new("UIPadding")
+
+		local HitCount = 0
+		local lastHit = tick()
+		
+		Gui.Name = "Gui"
+		Gui.Parent = target.PrimaryPart
+		Gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		Gui.Active = true
+		Gui.Adornee = target.HumanoidRootPart
+		Gui.AlwaysOnTop = true
+		Gui.LightInfluence = 1.000
+		Gui.MaxDistance = 250.000
+		Gui.Size = UDim2.new(4, 0, 2, 0)
+		Gui.SizeOffset = Vector2.new(1, 0)
+
+		Main.Name = "Main"
+		Main.Parent = Gui
+		Main.AnchorPoint = Vector2.new(0.5, 0.5)
+		Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Main.BackgroundTransparency = 1.000
+		Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Main.BorderSizePixel = 0
+		Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+		Main.Size = UDim2.new(1, 0, 1, 0)
+		Main.GroupTransparency = 1
+
+		Target.Name = "Target"
+		Target.Parent = Main
+		Target.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Target.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Target.BorderSizePixel = 0
+		Target.Size = UDim2.new(1, 0, 0.200000003, 0)
+		Target.Font = Enum.Font.SourceSans
+		Target.TextColor3 = Color3.fromRGB(0, 0, 0)
+		Target.TextScaled = true
+		Target.TextSize = 14.000
+		Target.TextWrapped = true
+		Target.TextXAlignment = Enum.TextXAlignment.Left
+
+		UIPadding.Parent = Target
+		UIPadding.PaddingLeft = UDim.new(0, 10)
+
+		UITextSizeConstraint.Parent = Target
+		UITextSizeConstraint.MaxTextSize = 14
+
+		Box.Name = "Box"
+		Box.Parent = Main
+		Box.AnchorPoint = Vector2.new(0.5, 0.5)
+		Box.BackgroundColor3 = Color3.fromRGB(65, 65, 65)
+		Box.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Box.BorderSizePixel = 0
+		Box.Position = UDim2.new(0.5, 0, 0.400000006, 0)
+		Box.Size = UDim2.new(1, 0, 0.200000003, 0)
+
+		Fill.Name = "Fill"
+		Fill.Parent = Box
+		Fill.AnchorPoint = Vector2.new(0, 0.5)
+		Fill.BackgroundColor3 = Color3.fromRGB(38, 255, 0)
+		Fill.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Fill.BorderSizePixel = 0
+		Fill.Position = UDim2.new(0, 0, 0.5, 0)
+		Fill.Size = UDim2.new(1, 0, 1, 0)
+
+		Health.Name = "Health"
+		Health.Parent = Main
+		Health.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Health.BackgroundTransparency = 1.000
+		Health.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Health.BorderSizePixel = 0
+		Health.Position = UDim2.new(0, 0, 0.600000024, 0)
+		Health.Size = UDim2.new(1, 0, 0.200000003, 0)
+		Health.Font = Enum.Font.SourceSans
+		Health.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Health.TextScaled = true
+		Health.TextSize = 14.000
+		Health.TextWrapped = true
+		Health.TextXAlignment = Enum.TextXAlignment.Left
+
+		UIPadding_2.Parent = Health
+		UIPadding_2.PaddingLeft = UDim.new(0, 10)
+
+		UITextSizeConstraint_2.Parent = Health
+		UITextSizeConstraint_2.MaxTextSize = 14
+
+		MaxHealth.Name = "MaxHealth"
+		MaxHealth.Parent = Main
+		MaxHealth.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		MaxHealth.BackgroundTransparency = 1.000
+		MaxHealth.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		MaxHealth.BorderSizePixel = 0
+		MaxHealth.Position = UDim2.new(0, 0, 0.600000024, 0)
+		MaxHealth.Size = UDim2.new(1, 0, 0.200000003, 0)
+		MaxHealth.Font = Enum.Font.SourceSans
+		MaxHealth.TextColor3 = Color3.fromRGB(255, 255, 255)
+		MaxHealth.TextScaled = true
+		MaxHealth.TextSize = 14.000
+		MaxHealth.TextWrapped = true
+		MaxHealth.TextXAlignment = Enum.TextXAlignment.Right
+
+		UIPadding_3.Parent = MaxHealth
+		UIPadding_3.PaddingRight = UDim.new(0, 10)
+
+		UITextSizeConstraint_3.Parent = MaxHealth
+		UITextSizeConstraint_3.MaxTextSize = 14
+		
+		Hit.Name = "Health"
+		Hit.Parent = Main
+		Hit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Hit.BackgroundTransparency = 1.000
+		Hit.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Hit.BorderSizePixel = 0
+		Hit.Position = UDim2.new(0, 0, 0.800000024, 0)
+		Hit.Size = UDim2.new(1, 0, 0.200000003, 0)
+		Hit.Font = Enum.Font.SourceSans
+		Hit.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Hit.TextScaled = true
+		Hit.TextSize = 14.000
+		Hit.TextWrapped = true
+		Hit.TextXAlignment = Enum.TextXAlignment.Left
+		Hit.Text = "Combo: " .. HitCount
+
+		UIPadding_4.Parent = Hit
+		UIPadding_4.PaddingLeft = UDim.new(0, 10)
+		
+		local TweenService = game:GetService("TweenService")
+		TweenService:Create(Main, TweenInfo.new(.5, Enum.EasingStyle.Linear), {GroupTransparency = 0}):Play()
+		
+		local conn = game.RunService.Heartbeat:Connect(function()
+			Target.Text = target.Name
+			local hpPercent = target.Humanoid.Health / target.Humanoid.MaxHealth
+			Fill.Size = Fill.Size:Lerp(UDim2.new(hpPercent, 0, 1, 0),0.2)
+			Fill.BackgroundColor3 = Fill.BackgroundColor3:Lerp(Color3.fromHSV(math.clamp(target.Humanoid.Health/target.Humanoid.MaxHealth,0,1) * .3, 1, 1), .3)
+			Health.Text = target.Humanoid.Health
+			MaxHealth.Text = target.Humanoid.MaxHealth
+			if game.Players.LocalPlayer:DistanceFromCharacter(target:GetPivot().Position) > 500 then
+				Main.Visible = false
+			end
+		end)
+		
+		target.Humanoid.HealthChanged:Connect(function()
+			HitCount += 1
+			lastHit = tick()
+			Hit.Text = "Combo: " .. HitCount
+		end)
+		
+		target.Humanoid.Died:Connect(function()
+			local t = TweenService:Create(Main, TweenInfo.new(.5, Enum.EasingStyle.Linear), {GroupTransparency = 1})
+			conn:Disconnect()
+			t:Play()
+			t.Completed:Wait()
+			Gui:Destroy()
+		end)
+		
+		task.spawn(function()
+			while task.wait(0.1) do
+				if tick() - lastHit > 2 then
+					HitCount = 0
+					Hit.Text = "Combo: 0"
+				end
+			end
+		end)
+		
+		function TargetHUD:Destroy()
+			local t = TweenService:Create(Main, TweenInfo.new(.5, Enum.EasingStyle.Linear), {GroupTransparency = 1})
+			conn:Disconnect()
+			t:Play()
+			t.Completed:Wait()
+			Gui:Destroy()
+		end
+		
+		return TargetHUD
+	end
 	
 	return Window
 end
