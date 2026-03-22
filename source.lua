@@ -452,7 +452,7 @@ function Proxima:InitWindow(WindowTitle : string)
 				end
 			end)
 			
-			NumberValue.Value = Config.Default
+			NumberValue.Value = Config.Default or Config.Min
 			NumberValue.Parent = Slider
 			
 			raw.Parent = Slider
@@ -622,7 +622,7 @@ function Proxima:InitWindow(WindowTitle : string)
 			State.Position = UDim2.new(0.24666667, 0, 0.0799999982, 0)
 			State.Size = UDim2.new(0, 216, 0, 17)
 			State.Font = Enum.Font.SourceSans
-			State.Text = "---"
+			State.Text = "---" or Config.Default
 			State.TextColor3 = Color3.fromRGB(255, 255, 255)
 			State.TextSize = 14.000
 			State.TextXAlignment = Enum.TextXAlignment.Right
