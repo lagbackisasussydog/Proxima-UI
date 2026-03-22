@@ -186,6 +186,7 @@ function Proxima:InitWindow(WindowTitle : string)
 		end)
 		
 		function Tabs:Button(Config : {})
+			local t = {}
 			local Title = Config.Title or "Button"
 			local subTitle = Config.SubTitle or ""
 			local Callback = Config.Callback
@@ -246,7 +247,14 @@ function Proxima:InitWindow(WindowTitle : string)
 			ImageButton.Size = UDim2.new(0, 25, 0, 25)
 			ImageButton.Image = "http://www.roblox.com/asset/?id=6031091008"
 			
-			ImageButton.MouseButton1Up:Connect(Callback)
+			local conn = ImageButton.MouseButton1Up:Connect(Callback)
+
+			function t:Lock()
+				conn:Disconnect()
+				subLabel.Text = "This function is locked"
+			end
+			
+			return t
 		end
 		
 		function Tabs:Toggle(Config : {})
@@ -780,7 +788,7 @@ function Proxima:InitWindow(WindowTitle : string)
 		Gui.Adornee = target.HumanoidRootPart
 		Gui.AlwaysOnTop = true
 		Gui.LightInfluence = 1.000
-		Gui.MaxDistance = 250.000
+		Gui.MaxDistance = math.huge
 		Gui.Size = UDim2.new(4, 0, 2, 0)
 		Gui.SizeOffset = Vector2.new(1, 0)
 
