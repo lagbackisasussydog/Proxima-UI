@@ -1,3 +1,9 @@
+if getgenv().Proxima_Loaded then return end
+
+pcall(function() 
+	getgenv().Proxima_Loaded = true
+end)
+
 local Proxima = {}
 
 local Lucide = loadstring(game:HttpGet("https://raw.githubusercontent.com/lagbackisasussydog/Proxima-UI/refs/heads/main/lucide-roblox.luau"))()
@@ -113,6 +119,7 @@ function Proxima:InitWindow(WindowTitle : string)
 		t:Play()
 		t.Completed:Wait()
 		Proxima:Destroy()
+		getgenv().Proxima_Loaded = false
 	end)
 	
 	function Window:Tab(TabName : string, Icon : string)
@@ -375,7 +382,7 @@ function Proxima:InitWindow(WindowTitle : string)
 			Label_3.Position = UDim2.new(0.0299999993, 0, 0.0599999987, 0)
 			Label_3.Size = UDim2.new(0, 216, 0, 17)
 			Label_3.Font = Enum.Font.SourceSans
-			Label_3.Text = "Slider"
+			Label_3.Text = Title
 			Label_3.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Label_3.TextSize = 14.000
 			Label_3.TextXAlignment = Enum.TextXAlignment.Left
