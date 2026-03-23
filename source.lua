@@ -451,12 +451,29 @@ function Proxima:InitWindow(WindowTitle : string)
 					Ball.Position = UDim2.new(raw.Value,0,0,0)
 				end
 			end)
-			
-			NumberValue.Value = Config.Default or Config.Min
+
 			NumberValue.Parent = Slider
-			
 			raw.Parent = Slider
 			raw.Name = "raw"
+			
+			local minVal = Config.Min
+			local maxVal = Config.Max
+			local default = Config.Default or minVal
+			
+			-- clamp default just in case
+			default = math.clamp(default, minVal, maxVal)
+			
+			-- convert to 0-1
+			local normalized = (default - minVal) / (maxVal - minVal)
+			
+			-- apply values
+			raw.Value = normalized
+			NumberValue.Value = default
+			
+			Fill.Size = UDim2.new(normalized,0,1,0)
+			Ball.Position = UDim2.new(normalized,0,0,0)
+			
+			State.Text = tostring(math.round(default))
 			
 			Fill.Size = UDim2.new(raw.Value,0,1,0)
 			Ball.Position = UDim2.new(raw.Value,0,0,0)
