@@ -515,13 +515,10 @@ function Proxima:InitWindow(WindowTitle : string)
 					activated = false
 				end
 			end)
-			Update()
 			
 			function t:GetValue()
 				return NumberValue.Value
 			end
-
-			Update()
 			
 			return t
 		end
