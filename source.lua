@@ -520,6 +520,8 @@ function Proxima:InitWindow(WindowTitle : string)
 			function t:GetValue()
 				return NumberValue.Value
 			end
+
+			Update()
 			
 			return t
 		end
