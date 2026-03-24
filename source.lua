@@ -769,6 +769,228 @@ function Proxima:InitWindow(WindowTitle : string)
 				end)
 			end
 		end
+
+		function Tabs:MultiDropdown(Config)
+			local t = {}
+			local Title = Config.Title or "Dropdown"
+			
+			if not Config.Callback or type(Config.Callback) ~= "function" then error("Missing or invalid arguments") end
+			
+			local Dropdown = Instance.new("Frame")
+			local Label = Instance.new("TextLabel")
+			local UIGradient = Instance.new("UIGradient")
+			local State = Instance.new("TextLabel")
+			local ImageButton = Instance.new("ImageButton")
+
+			local selected = {}
+			for _, v in ipairs(Config.Default or {}) do
+				selected[v] = true
+			end
+
+			local function UpdateText()
+		        local temp = {}
+		        for v,_ in pairs(selected) do
+		            table.insert(temp, v)
+		        end
+		        
+		        State.Text = (#temp > 0 and table.concat(temp, ", ")) or "---"
+		        
+		        Config.Callback(temp)
+		    end
+			
+			Dropdown.Name = "Dropdown"
+			Dropdown.Parent = Section
+			Dropdown.BackgroundColor3 = Color3.fromRGB(103, 103, 103)
+			Dropdown.BackgroundTransparency = 0.500
+			Dropdown.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Dropdown.BorderSizePixel = 0
+			Dropdown.Size = UDim2.new(0, 309, 0, 50)
+
+			Label.Name = "Label"
+			Label.Parent = Dropdown
+			Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Label.BackgroundTransparency = 1.000
+			Label.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Label.BorderSizePixel = 0
+			Label.Position = UDim2.new(0.0299999993, 0, 0.0599999987, 0)
+			Label.Size = UDim2.new(0, 216, 0, 17)
+			Label.Font = Enum.Font.SourceSans
+			Label.Text = Title
+			Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Label.TextSize = 14.000
+			Label.TextXAlignment = Enum.TextXAlignment.Left
+
+			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(85, 170, 255)), ColorSequenceKeypoint.new(0.99, Color3.fromRGB(47, 93, 140)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(85, 170, 255))}
+			UIGradient.Parent = Dropdown
+
+			State.Name = "State"
+			State.Parent = Dropdown
+			State.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			State.BackgroundTransparency = 1.000
+			State.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			State.BorderSizePixel = 0
+			State.Position = UDim2.new(0.24666667, 0, 0.0799999982, 0)
+			State.Size = UDim2.new(0, 216, 0, 17)
+			State.Font = Enum.Font.SourceSans
+			State.Text = "---"
+			State.TextColor3 = Color3.fromRGB(255, 255, 255)
+			State.TextSize = 14.000
+			State.TextXAlignment = Enum.TextXAlignment.Right
+
+			ImageButton.Parent = Dropdown
+			ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ImageButton.BackgroundTransparency = 1.000
+			ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			ImageButton.BorderSizePixel = 0
+			ImageButton.Position = UDim2.new(0.0299999993, 0, 0.5, 0)
+			ImageButton.Size = UDim2.new(0, 20, 0, 20)
+			ImageButton.Image = "http://www.roblox.com/asset/?id=6031091008"
+			
+			local DropdownMenu = Instance.new("Frame")
+			local Label1 = Instance.new("TextLabel")
+			local Label2 = Instance.new("TextLabel")
+			local Container = Instance.new("ScrollingFrame")
+			local UIGridLayout = Instance.new("UIGridLayout")
+			local Back = Instance.new("ImageButton")
+
+			DropdownMenu.Name = Title
+			DropdownMenu.Parent = Dropdowns
+			DropdownMenu.AnchorPoint = Vector2.new(0.5, 0.5)
+			DropdownMenu.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			DropdownMenu.BackgroundTransparency = 0.500
+			DropdownMenu.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			DropdownMenu.BorderSizePixel = 0
+			DropdownMenu.ClipsDescendants = true
+			DropdownMenu.Position = UDim2.new(0.5, 0, 0.5, 0)
+			DropdownMenu.Size = UDim2.new(1, 0, 1, 0)
+			DropdownMenu.ZIndex = 99
+			DropdownMenu.Visible = false
+
+			Label1.Name = "Label1"
+			Label1.Parent = DropdownMenu
+			Label1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Label1.BackgroundTransparency = 1.000
+			Label1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Label1.BorderSizePixel = 0
+			Label1.Position = UDim2.new(0.0142857144, 0, 0.0399999991, 0)
+			Label1.Size = UDim2.new(0, 200, 0, 50)
+			Label1.Font = Enum.Font.SourceSansBold
+			Label1.Text = "SELECT AN OPTION FOR"
+			Label1.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Label1.TextSize = 20.000
+
+			Label2.Name = "Label2"
+			Label2.Parent = DropdownMenu
+			Label2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Label2.BackgroundTransparency = 1.000
+			Label2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Label2.BorderSizePixel = 0
+			Label2.Position = UDim2.new(0.0571428575, 0, 0.285714298, 0)
+			Label2.Size = UDim2.new(0, 200, 0, 24)
+			Label2.Font = Enum.Font.SourceSansBold
+			Label2.Text = Title
+			Label2.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Label2.TextSize = 20.000
+			Label2.TextXAlignment = Enum.TextXAlignment.Left
+
+			Container.Name = "Container"
+			Container.Parent = DropdownMenu
+			Container.Active = true
+			Container.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Container.BackgroundTransparency = 1.000
+			Container.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Container.BorderSizePixel = 0
+			Container.Position = UDim2.new(0.469999999, 0, 0.254999995, 0)
+			Container.Size = UDim2.new(0, 168, 0, 113)
+			Container.ScrollBarThickness = 0
+
+			UIGridLayout.Parent = Container
+			UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+			UIGridLayout.CellSize = UDim2.new(1, 0, 0, 25)
+
+			Back.Name = "Back"
+			Back.Parent = DropdownMenu
+			Back.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Back.BackgroundTransparency = 1.000
+			Back.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Back.BorderSizePixel = 0
+			Back.Position = UDim2.new(0.0119046457, 0, 0.805714309, 0)
+			Back.Rotation = 180.000
+			Back.Size = UDim2.new(0, 25, 0, 25)
+			Back.Image = "http://www.roblox.com/asset/?id=6031091008"
+			
+			Back.MouseButton1Up:Connect(function()
+				DropdownMenu.Visible = false
+			end)
+			
+			ImageButton.MouseButton1Up:Connect(function()
+				DropdownMenu.Visible = true
+			end)
+			
+			for i, v in pairs(Config.List or {}) do
+				local Button = Instance.new("Frame")
+				local UIGradient = Instance.new("UIGradient")
+				local TextButton = Instance.new("TextButton")
+				
+				Button.Name = "Button"
+				Button.Parent = Container
+				Button.Active = true
+				Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				Button.BackgroundTransparency = 0.500
+				Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				Button.BorderSizePixel = 0
+				Button.Selectable = true
+				Button.Size = UDim2.new(0, 200, 0, 50)
+
+				UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(85, 170, 255)), ColorSequenceKeypoint.new(0.99, Color3.fromRGB(47, 93, 140)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(85, 170, 255))}
+				UIGradient.Parent = Button
+
+				TextButton.Parent = Button
+				TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				TextButton.BackgroundTransparency = 1.000
+				TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				TextButton.BorderSizePixel = 0
+				TextButton.Size = UDim2.new(1, 0, 1, 0)
+				TextButton.Font = Enum.Font.SourceSans
+				TextButton.Text = tostring(v)
+				TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+				TextButton.TextSize = 14.000
+				
+				local function Refresh()
+		            if selected[v] then
+		                TextButton.Text = "✓ " .. option
+		                TextButton.BackgroundColor3 = Color3.fromRGB(85,170,255)
+		            else
+		                TextButton.Text = option
+		                TextButton.BackgroundColor3 = Color3.fromRGB(60,60,60)
+		            end
+		        end
+
+				TextButton.MouseButton1Up:Connect(function()
+					if selected[option] then
+		                selected[option] = nil
+		            else
+		                selected[option] = true
+		            end
+		            
+		            Refresh()
+		            UpdateText()
+				end)
+				
+				Refresh()
+			end
+
+			UpdateText()
+			function t:Get()
+		        local temp = {}
+		        for v,_ in pairs(selected) do
+		            table.insert(temp, v)
+		        end
+		        return temp
+		    end
+			
+			return t
+		end
 		
 		return Tabs
 	end
