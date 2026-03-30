@@ -67,6 +67,7 @@ function Proxima:InitWindow(WindowTitle : string)
 	TextLabel.Text = WindowTitle or "Proxima - V0.1"
 	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 	TextLabel.TextSize = 14.000
+	TextLabel.Active = true
 	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 
 	UIPadding.Parent = TextLabel
