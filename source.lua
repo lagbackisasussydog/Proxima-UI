@@ -158,6 +158,7 @@ function Proxima:InitWindow(WindowTitle : string)
 		Section.BorderSizePixel = 0
 		Section.Position = UDim2.new(0.100000001, 0, 0.125, 0)
 		Section.Selectable = false
+		Section.Active = true
 		Section.Size = UDim2.new(0, 315, 0, 175)
 		Section.ScrollBarThickness = 0
 		Section.Visible = false
