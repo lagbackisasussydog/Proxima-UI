@@ -121,7 +121,7 @@ function Proxima:InitWindow(WindowTitle : string)
 	Close.Image = "http://www.roblox.com/asset/?id=6031094678"
 
 	HideButton.Name = ""
-	HideButton.Parent = Main
+	HideButton.Parent = HideWindow
 	HideButton.Size = UDim2.new(0, 45, 0, 45)
 	HideButton.Text = "Hide"
 	HideButton.AnchorPoint = Vector2.new(0.5, 0.5)
