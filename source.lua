@@ -16,7 +16,7 @@ function Proxima:InitWindow(WindowTitle : string)
 	
 	local Proxima = Instance.new("ScreenGui")
 	local Main = Instance.new("CanvasGroup")
-	local UICorner = Instance.new("UICorner")
+	--local UICorner = Instance.new("UICorner")
 	local Title = Instance.new("Frame")
 	local TextLabel = Instance.new("TextLabel")
 	local UIPadding = Instance.new("UIPadding")
@@ -52,7 +52,7 @@ function Proxima:InitWindow(WindowTitle : string)
 	Main.Active = true
 	Main.Draggable = true
 	
-	UICorner.Parent = Main
+	--UICorner.Parent = Main
 
 	Title.Name = "Title"
 	Title.Parent = Main
