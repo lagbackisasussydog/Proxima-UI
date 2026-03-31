@@ -125,7 +125,7 @@ function Proxima:InitWindow(WindowTitle : string)
 	HideButton.Size = UDim2.new(0, 45, 0, 45)
 	HideButton.Text = "Hide"
 	HideButton.AnchorPoint = Vector2.new(0.5, 0.5)
-	HideButton.Position = UDim2.new(1,0,0.5,0)
+	HideButton.Position = UDim2.new(.7,0,0.5,0)
 	
 	Close.MouseButton1Up:Connect(function()
 		local t = game:GetService("TweenService"):Create(Main, TweenInfo.new(.5), {Size = UDim2.new(0,350,0,0), GroupTransparency = 1})
