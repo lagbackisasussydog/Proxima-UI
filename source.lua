@@ -10,6 +10,9 @@ local Lucide = loadstring(game:HttpGet("https://raw.githubusercontent.com/lagbac
 
 function Proxima:InitWindow(WindowTitle : string)
 	local Window = {}
+
+	local HideWindow = Instance.new("ScreenGui")
+	local HideButton = Instance.new("TextButton")
 	
 	local Proxima = Instance.new("ScreenGui")
 	local Main = Instance.new("CanvasGroup")
@@ -31,8 +34,10 @@ function Proxima:InitWindow(WindowTitle : string)
 
 	if game:GetService("RunService"):IsStudio() then
 		Proxima.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+		HideWindow.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	elseif game:GetService("RunService"):IsClient() then
 		Proxima.Parent = game.CoreGui
+		HideWindow.Parent = game.CoreGui
 	end
 
 	Main.Name = "Main"
@@ -115,12 +120,35 @@ function Proxima:InitWindow(WindowTitle : string)
 	Close.Size = UDim2.new(0, 25, 0, 25)
 	Close.Image = "http://www.roblox.com/asset/?id=6031094678"
 
+	HideButton.Name = ""
+	HideButton.Parent = Main
+	HideButton.Size = UDim2.new(0, 45, 0, 45)
+	HideButton.Text = "Hide"
+	HideButton.AnchorPoint = Vector2.new(0.5, 0.5)
+	HideButton.Position = UDim2.new(1,0,0.5,0)
+	
 	Close.MouseButton1Up:Connect(function()
 		local t = game:GetService("TweenService"):Create(Main, TweenInfo.new(.5), {Size = UDim2.new(0,350,0,0), GroupTransparency = 1})
 		t:Play()
 		t.Completed:Wait()
 		Proxima:Destroy()
 		getgenv().Proxima_Loaded = false
+	end)
+
+	local Hidden = false
+	
+	HideButton.MouseButton1Up:Connect(function()
+		Hidden = not Hidden
+
+		if Hidden then
+			local t = game:GetService("TweenService"):Create(Main, TweenInfo.new(.5), {Size = UDim2.new(0,350,0,0), GroupTransparency = 1})
+			t:Play()
+			t.Completed:Wait()
+		else
+			local t = game:GetService("TweenService"):Create(Main, TweenInfo.new(.5), {Size = UDim2.new(0,350,0,200), GroupTransparency = 0})
+			t:Play()
+			t.Completed:Wait()
+		end
 	end)
 	
 	function Window:Tab(TabName : string, Icon : string)
