@@ -283,6 +283,10 @@ function Proxima:InitWindow(WindowTitle : string)
 				conn:Disconnect()
 				subLabel.Text = "This function is locked"
 			end
+
+			function t:ChangeText(Content)
+				subLabel.Text = Content
+			end
 			
 			return t
 		end
